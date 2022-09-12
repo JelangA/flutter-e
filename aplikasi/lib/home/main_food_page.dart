@@ -19,8 +19,10 @@ class _MainFoodPageState extends State<MainFoodPage> {
     return Scaffold(
       body: Column(
         children: [
+          //Shown The Header
           Container(
             child: Container(
+              color: Colors.red,
               margin: EdgeInsets.only(top: 55, bottom: 15),
               padding: EdgeInsets.only(left: 20, right: 20),
               child: Row(
@@ -55,7 +57,13 @@ class _MainFoodPageState extends State<MainFoodPage> {
               ),
             ),
           ),
+          //body
           FoodPageBody(),
+          Container(
+            width: 400,
+            height: 400,
+            color: Colors.brown,
+          )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
