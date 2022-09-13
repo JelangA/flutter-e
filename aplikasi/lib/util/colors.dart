@@ -14,3 +14,11 @@ class AppColors {
 
   static final Color yellowColor = const Color(0xFFffd379);
 }
+
+class DebugColor{
+  static final Color color1 = Color.fromARGB(255, 255, 1, 1);
+  static final Color color2 = Color.fromARGB(255, 1, 160, 48);
+
+  static final Color color3 = Color.fromARGB(255, 17, 0, 252);
+  static final Color color4 = Color.fromARGB(255, 255, 238, 1);
+}

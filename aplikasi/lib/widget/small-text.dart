@@ -23,7 +23,7 @@ class SmallText extends StatelessWidget {
 
       style: TextStyle(
         color: color,
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         fontSize: size,
         height: height
       ),
