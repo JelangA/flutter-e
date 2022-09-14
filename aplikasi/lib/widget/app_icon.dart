@@ -1,4 +1,5 @@
 
+import 'package:aplikasi/util/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppIcon extends StatelessWidget {
@@ -26,7 +27,7 @@ class AppIcon extends StatelessWidget {
       child: Icon(
         icon,
         color: iconColor,
-        size: 16,
+        size: Dimentions.iconSize16,
       ),
     );
   }
