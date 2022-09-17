@@ -44,7 +44,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       children: [
         //slide container add
         Container(
-          color: DebugColor.color1,
+          // color: DebugColor.color1,
           height: Dimentions.pageView,
           child: PageView.builder(
               controller: pageController,
@@ -179,7 +179,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  //container slide 
+  //container slide
   Widget _buildPageItem(int index) {
     //fungsi zoom in saat slide
     Matrix4 matrix = new Matrix4.identity();
@@ -215,7 +215,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Container(
             height: Dimentions.pageViewContainer,
             margin: EdgeInsets.only(
-                left: Dimentions.width10, right: Dimentions.width10),
+              left: Dimentions.width10,
+              right: Dimentions.width10,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimentions.radius30),
               color: index.isEven
@@ -233,9 +235,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             child: Container(
               height: Dimentions.pageViewTextContainer,
               margin: EdgeInsets.only(
-                  left: Dimentions.width30,
-                  right: Dimentions.width30,
-                  bottom: Dimentions.height30),
+                left: Dimentions.width30,
+                right: Dimentions.width30,
+                bottom: Dimentions.height30,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimentions.radius20),
                 color: Colors.white,
@@ -252,16 +255,18 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   BoxShadow(
                     color: Colors.white,
                     offset: Offset(5, 0),
-                  )
+                  ),
                 ],
               ),
-              
+
               //body container
               child: Container(
-                color: DebugColor.color2,
+                // color: DebugColor.color2,
                 padding: EdgeInsets.only(
                     top: Dimentions.height15, left: 15, right: 15),
-                child: AppColumn(text: "Hamburg Food",),
+                child: AppColumn(
+                  text: "Hamburg Food",
+                ),
               ),
             ),
           ),

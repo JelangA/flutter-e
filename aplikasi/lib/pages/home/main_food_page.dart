@@ -25,7 +25,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
           //Shown The Header
           Container(
             child: Container(
-              color: DebugColor.color4,
+              // color: DebugColor.color4,
               margin: EdgeInsets.only(
                   top: Dimentions.height45, bottom: Dimentions.height15),
               padding: EdgeInsets.only(
