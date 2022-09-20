@@ -1,4 +1,5 @@
 import 'package:aplikasi/data/api/api_client.dart';
+import 'package:aplikasi/util/app_constants.dart';
 import 'package:get/get.dart';
 
 class PopularProductRepo extends GetxService {
@@ -6,7 +7,7 @@ class PopularProductRepo extends GetxService {
 
   PopularProductRepo({required this.apiClient});
 
-  Future<Response> getPopularProductList() async {
-    return await apiClient.getData("end point url");
+  Future<Response> getPopularProductList() async { 
+    return await apiClient.getData(AppConstants.POPULAR_PRODUCT);
   }
 }

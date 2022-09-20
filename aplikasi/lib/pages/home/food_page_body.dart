@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables//////////////////////////////////////////////////////, prefer_const_literals_to_create_immutables, unnecessary_new
 
+import 'package:aplikasi/controllers/popular_product_controller.dart';
+import 'package:aplikasi/models/products_model.dart';
+import 'package:aplikasi/util/app_constants.dart';
 import 'package:aplikasi/util/colors.dart';
 import 'package:aplikasi/util/dimensions.dart';
 import 'package:aplikasi/widget/app_column.dart';
@@ -8,6 +11,7 @@ import 'package:aplikasi/widget/icon_and_text.dart';
 import 'package:aplikasi/widget/small-text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -43,27 +47,36 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         //slide container add
-        Container(
-          // color: DebugColor.color1,
-          height: Dimentions.pageView,
-          child: PageView.builder(
+        GetBuilder<PopularProductController>(builder: (popularProduct) {
+          return Container(
+            // color: DebugColor.color1,
+            height: Dimentions.pageView,
+            child: PageView.builder(
               controller: pageController,
-              itemCount: 5,
+              itemCount: popularProduct.popularProductList.length,
               itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
-        ),
+                return _buildPageItem(position, popularProduct.popularProductList[position]);
+              },
+            ),
+          );
+        }),
         //dots_indicator
-        new DotsIndicator(
-          dotsCount: 5,
-          position: _currentPageValue,
-          decorator: DotsDecorator(
-            // activeColor: AppColors.mainColor,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
+        GetBuilder<PopularProductController>(
+          builder: (popularProduct) {
+            return DotsIndicator(
+              dotsCount: popularProduct.popularProductList.isEmpty
+                  ? 1
+                  : popularProduct.popularProductList.length,
+              position: _currentPageValue,
+              decorator: DotsDecorator(
+                // activeColor: AppColors.mainColor,
+                size: const Size.square(9.0),
+                activeSize: const Size(18.0, 9.0),
+                activeShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0)),
+              ),
+            );
+          },
         ),
         //popular
         SizedBox(
@@ -180,7 +193,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   }
 
   //container slide
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProduct) {
     //fungsi zoom in saat slide
     Matrix4 matrix = new Matrix4.identity();
     if (index == _currentPageValue.floor()) {
@@ -225,7 +238,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   : const Color(0XFF9294cc),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/image/food0.jpg"),
+                image: NetworkImage(
+                  "${AppConstants.BASE_URL}/uploads/${popularProduct.img!}"
+                ),
               ),
             ),
           ),
