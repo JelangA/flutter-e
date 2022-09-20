@@ -13,10 +13,11 @@ class ApiClient extends GetConnect implements GetxService {
     token = AppConstants.TOKEN;
     _mainHeaders = {
       'Content-type': 'application/json; charset=UTF-8',
-      //coba hapus
       'Authorization':'Bearer $token',
     };
   }
+
+  //get
   Future<Response> getData(String uri) async {
     try {
       Response response = await get(uri);
