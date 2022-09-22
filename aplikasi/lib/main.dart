@@ -4,6 +4,7 @@ import 'package:aplikasi/pages/food/popular_food_detail.dart';
 import 'package:aplikasi/pages/food/recomended_food_detail.dart';
 import 'package:aplikasi/pages/home/food_page_body.dart';
 import 'package:aplikasi/pages/home/main_food_page.dart';
+import 'package:aplikasi/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'helper/dependencies.dart' as dep;
@@ -22,13 +23,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<RecomendedProductController>().getRecomendedProductList();
+    // ignore: prefer_const_constructors
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      
       home: MainFoodPage(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
     );
   }
 }

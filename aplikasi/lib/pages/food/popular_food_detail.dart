@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:aplikasi/controllers/popular_product_controller.dart';
+import 'package:aplikasi/pages/home/main_food_page.dart';
 import 'package:aplikasi/util/colors.dart';
 import 'package:aplikasi/util/dimensions.dart';
 import 'package:aplikasi/widget/app_column.dart';
@@ -7,12 +9,18 @@ import 'package:aplikasi/widget/app_icon.dart';
 import 'package:aplikasi/widget/big-text.dart';
 import 'package:aplikasi/widget/expandable_text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
+    print("page id is ${pageId}");
+    print("poduct name is ${product.name.toString()}");
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -40,8 +48,15 @@ class PopularFoodDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back_ios),
-                AppIcon(icon: Icons.shopping_cart_outlined),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => MainFoodPage());
+                  },
+                  child: AppIcon(icon: Icons.arrow_back_ios),
+                ),
+                GestureDetector(
+                  child: AppIcon(icon: Icons.shopping_cart_outlined),
+                ),
               ],
             ),
           ),
@@ -73,7 +88,13 @@ class PopularFoodDetail extends StatelessWidget {
                   ),
                   BigText(text: "Introduce"),
                   // ExpandableTextWidget(text: "test")
-                  Expanded(child: SingleChildScrollView(child: ExpandableTextWidget(text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta dolore suscipit aperiam temporibus quaerat delectus eveniet quam corporis! Corrupti repellendus asperiores harum explicabo rerum nisi libero quaerat totam est amet nemo quisquam incidunt aperiam maiores id culpa, ipsum ullam sed facere iusto eius. Hic labore consequatur animi. Architecto quos quae iusto ullam, debitis consequatur minima laborum minus velit eos sit, rem cumque fugit culpa praesentium assumenda qui porro repudiandae quasi, neque mollitia exercitationem perferendis necessitatibus. Odio quibusdam aspernatur vero enim! Distinctio rem quo repellendus mollitia sint optio veritatis nulla modi, nihil quae ex sunt minima molestias praesentium voluptatibus error ducimus nobis, itaque obcaecati corporis eos dolorum voluptatum! Quam nam, cumque provident, velit qui quas sequi nihil id veniam quidem excepturi sit ipsam totam iure incidunt. Voluptate porro nisi inventore architecto autem accusamus alias nulla illo, ea pariatur vel fugiat possimus quibusdam provident non ipsam eveniet ratione optio deleniti laudantium totam necessitatibus obcaecati blanditiis. Libero voluptate porro sit facilis odit dolorum itaque, aliquam aspernatur iste eum illo cumque incidunt consequatur similique ex necessitatibus. Ipsum dolor asperiores, odit iste quisquam quos voluptatibus nihil numquam ipsa vel magnam maiores cupiditate? Quidem suscipit sint dicta minima odit illo expedita necessitatibus voluptatum, animi consequuntur dolore?"))),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: ExpandableTextWidget(
+                          text:
+                              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta dolore suscipit aperiam temporibus quaerat delectus eveniet quam corporis! Corrupti repellendus asperiores harum explicabo rerum nisi libero quaerat totam est amet nemo quisquam incidunt aperiam maiores id culpa, ipsum ullam sed facere iusto eius. Hic labore consequatur animi. Architecto quos quae iusto ullam, debitis consequatur minima laborum minus velit eos sit, rem cumque fugit culpa praesentium assumenda qui porro repudiandae quasi, neque mollitia exercitationem perferendis necessitatibus. Odio quibusdam aspernatur vero enim! Distinctio rem quo repellendus mollitia sint optio veritatis nulla modi, nihil quae ex sunt minima molestias praesentium voluptatibus error ducimus nobis, itaque obcaecati corporis eos dolorum voluptatum! Quam nam, cumque provident, velit qui quas sequi nihil id veniam quidem excepturi sit ipsam totam iure incidunt. Voluptate porro nisi inventore architecto autem accusamus alias nulla illo, ea pariatur vel fugiat possimus quibusdam provident non ipsam eveniet ratione optio deleniti laudantium totam necessitatibus obcaecati blanditiis. Libero voluptate porro sit facilis odit dolorum itaque, aliquam aspernatur iste eum illo cumque incidunt consequatur similique ex necessitatibus. Ipsum dolor asperiores, odit iste quisquam quos voluptatibus nihil numquam ipsa vel magnam maiores cupiditate? Quidem suscipit sint dicta minima odit illo expedita necessitatibus voluptatum, animi consequuntur dolore?"),
+                    ),
+                  ),
                 ],
               ),
             ),
