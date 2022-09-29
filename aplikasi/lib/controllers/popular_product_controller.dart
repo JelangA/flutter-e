@@ -1,3 +1,4 @@
+import 'package:aplikasi/controllers/cart_controller.dart';
 import 'package:aplikasi/data/repository/popular_product_repo.dart';
 import 'package:aplikasi/models/products_model.dart';
 import 'package:aplikasi/util/colors.dart';
@@ -10,17 +11,20 @@ class PopularProductController extends GetxController {
   PopularProductController({required this.popularProductRepo});
   List<dynamic> _popularProductList = [];
   List<dynamic> get popularProductList => _popularProductList;
+  late CartController _cart;
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
   int _quantity = 0;
   int get quantity => _quantity;
+  int _inCartItem = 0;
+  int get inCartItems => _inCartItem + _quantity;
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
-      print("dapet popuar produk");
+      // print("dapet popuar produk");
       // _popularProductList = [];
       _popularProductList.addAll(Product.fromJson(response.body).product);
       // print(popularProductList);
@@ -62,7 +66,15 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct() {
+  void initProduct(CartController cart) {
     _quantity = 0;
+    _inCartItem = 0;
+    _cart = cart;
+    //if exist
+    //GET item cart dari storage
+  }
+
+  void AddItem(ProductModel product) {
+    _cart.addItem(product, _quantity);
   }
 }

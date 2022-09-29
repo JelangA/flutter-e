@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:aplikasi/controllers/cart_controller.dart';
 import 'package:aplikasi/controllers/popular_product_controller.dart';
 import 'package:aplikasi/pages/home/main_food_page.dart';
 import 'package:aplikasi/util/app_constants.dart';
@@ -20,9 +21,10 @@ class PopularFoodDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var product =
         Get.find<PopularProductController>().popularProductList[pageId];
+    Get.find<PopularProductController>()
+        .initProduct(Get.find<CartController>());
     // print("page id is ${pageId}");
     // print("poduct name is ${product.name}");
-    Get.find<PopularProductController>().initProduct();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -177,9 +179,14 @@ class PopularFoodDetail extends StatelessWidget {
                     left: Dimentions.width20,
                     right: Dimentions.width20,
                   ),
-                  child: BigText(
-                    text: "\$ ${product.price!} | Add to cart",
-                    color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      popularProduct.AddItem(product);
+                    },
+                    child: BigText(
+                      text: "\$ ${product.price!} | Add to cart",
+                      color: Colors.white,
+                    ),
                   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimentions.radius20),
