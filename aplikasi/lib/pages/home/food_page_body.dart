@@ -117,6 +117,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
+        //recomended food 
         //listview food card
         GetBuilder<RecomendedProductController>(builder: (recomendedProduct) {
           return recomendedProduct.isLoaded
@@ -127,7 +128,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecomendedFood());
+                        Get.toNamed(RouteHelper.getRecomendedFood(index));
                       },
                       child: Container(
                         margin: EdgeInsets.only(

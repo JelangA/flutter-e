@@ -26,4 +26,7 @@ class RecomendedProductController extends GetxController {
       print(response.body);
     }
   }
+
+
+
 }

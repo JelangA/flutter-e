@@ -11,3 +11,4 @@ class RecomendedProductRepo extends GetxService {
     return await apiClient.getData(AppConstants.RECOMMENDED_PRODUCT_URI);
   }
 }
+ 
