@@ -8,7 +8,7 @@ class Dimentions {
   static double screenwidth = Get.context!.width;
 
   /// fungsi untuk mengkalkulasikan ukuran pada container dengan device
-  static double pageView = screenHeight / 2.64;
+  static double pageView = screenHeight / 3.55;
   static double pageViewContainer = screenHeight / 3.84;
   static double pageViewTextContainer = screenHeight / 7.03;
 

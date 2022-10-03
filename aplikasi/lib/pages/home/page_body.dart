@@ -112,12 +112,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 2),
-                child: SmallText(text: "Food pairing"),
+                child: SmallText(text: "Producr"),
               ),
             ],
           ),
         ),
-        //recomended food 
+        //recomended food
         //listview food card
         GetBuilder<RecomendedProductController>(builder: (recomendedProduct) {
           return recomendedProduct.isLoaded
@@ -185,9 +185,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                               .name!),
                                       SizedBox(height: Dimentions.height10),
                                       SmallText(
-                                          text:
-                                              "tulisan deskripsi makanan dan minuman",
-                                            ),
+                                        text: " Rp. 120rb ",
+                                      ),
                                       SizedBox(height: Dimentions.height10),
                                       Row(
                                         mainAxisAlignment:
@@ -195,7 +194,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                         children: [
                                           IconAndTextWidget(
                                               icon: Icons.circle_sharp,
-                                              text: "Normal",
+                                              text: "baru",
                                               iconColor: AppColors.iconColor1),
                                           IconAndTextWidget(
                                               icon: Icons.location_on,
@@ -222,7 +221,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               : CircularProgressIndicator(
                   color: AppColors.mainColor,
                 );
-        })
+        }),
       ],
     );
   }
@@ -302,7 +301,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           //       color: Colors.white,
           //       boxShadow: [
           //         BoxShadow(
-          //           color: Color(0xFFe8e8e8), 
+          //           color: Color(0xFFe8e8e8),
           //           blurRadius: 5.0,
           //           offset: Offset(0, 5),
           //         ),
