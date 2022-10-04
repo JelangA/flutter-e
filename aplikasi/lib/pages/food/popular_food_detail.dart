@@ -22,7 +22,7 @@ class PopularFoodDetail extends StatelessWidget {
     var product =
         Get.find<PopularProductController>().popularProductList[pageId];
     Get.find<PopularProductController>()
-        .initProduct(Get.find<CartController>());
+        .initProduct(product, Get.find<CartController>());
     // print("page id is ${pageId}");
     // print("poduct name is ${product.name}");
     return Scaffold(
@@ -62,9 +62,22 @@ class PopularFoodDetail extends StatelessWidget {
                   },
                   child: AppIcon(icon: Icons.arrow_back_ios),
                 ),
-                GestureDetector(
-                  child: AppIcon(icon: Icons.shopping_cart_outlined),
-                ),
+                GetBuilder<PopularProductController>(builder: (controller) {
+                  return Stack(
+                    children: [
+                      AppIcon(icon: Icons.shopping_cart_outlined),
+                      Get.find<PopularProductController>().totalItem>=1
+                      ?AppIcon(icon: Icons.shopping_cart_outlined)
+                      :AppIcon(
+                              icon: Icons.circle,
+                              size: 20,
+                              iconColor: Colors.transparent,
+                              backGroundColor: AppColors.mainColor,
+                            )
+                    ],
+
+                  );
+                })
               ],
             ),
           ),
@@ -155,7 +168,7 @@ class PopularFoodDetail extends StatelessWidget {
                       SizedBox(
                         width: Dimentions.width10 / 2,
                       ),
-                      BigText(text: popularProduct.quantity.toString()),
+                      BigText(text: popularProduct.inCartItems.toString()),
                       SizedBox(
                         width: Dimentions.width10 / 2,
                       ),

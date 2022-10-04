@@ -18,14 +18,14 @@ class PopularProductController extends GetxController {
 
   int _quantity = 0;
   int get quantity => _quantity;
-  int _inCartItem = 0;
-  int get inCartItems => _inCartItem + _quantity;
+  int _inCartItems = 0;
+  int get inCartItems => _inCartItems + _quantity;
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopularProductList();
     if (response.statusCode == 200) {
       // print("dapet popuar produk");
-      // _popularProductList = [];
+      _popularProductList = [];
       _popularProductList.addAll(Product.fromJson(response.body).product);
       // print(popularProductList);
       _isLoaded = true;
@@ -45,15 +45,15 @@ class PopularProductController extends GetxController {
   }
 
   int checkQuantity(int quantity) {
-    if (quantity < 0) {
+    if ((_inCartItems + quantity) < 0) {
       Get.snackbar(
         "item cont",
-        "melebihi batas",
+        "tambahkan product",
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
       return 0;
-    } else if (quantity > 20) {
+    } else if ((_inCartItems + quantity) > 20) {
       Get.snackbar(
         "item cont",
         "melebihi batas",
@@ -66,15 +66,38 @@ class PopularProductController extends GetxController {
     }
   }
 
-  void initProduct(CartController cart) {
+  void initProduct(ProductModel product, CartController cart) {
     _quantity = 0;
-    _inCartItem = 0;
+    _inCartItems = 0;
     _cart = cart;
+    var exist = false;
+    exist = _cart.exixtInCart(product);
     //if exist
     //GET item cart dari storage
+    print("exixt or not ${exist}");
+    if (exist) {
+      _inCartItems = _cart.getQuantity(product);
+    }
+    print("quantity di cart = ${_inCartItems}");
   }
 
   void AddItem(ProductModel product) {
+    // if (_quantity > 0) {
     _cart.addItem(product, _quantity);
+    _quantity = 0;
+    _inCartItems = _cart.getQuantity(product);
+
+    _cart.items.forEach((key, value) {
+      print(" id = ${value.id.toString()} quantity = ${value.quantity}");
+    });
+    // }
+    // else {
+    //   Get.snackbar("item count", "tambahkan jumlah item",
+    //       backgroundColor: AppColors.mainColor, colorText: Colors.white);
+    // }
+  }
+
+  int get totalItem {
+    return _cart.totalItem;
   }
 }
