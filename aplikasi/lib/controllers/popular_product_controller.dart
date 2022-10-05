@@ -38,6 +38,7 @@ class PopularProductController extends GetxController {
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
       _quantity = checkQuantity(_quantity + 1);
+      print("item = ${_quantity}");
     } else {
       _quantity = checkQuantity(_quantity - 1);
     }
@@ -95,6 +96,7 @@ class PopularProductController extends GetxController {
     //   Get.snackbar("item count", "tambahkan jumlah item",
     //       backgroundColor: AppColors.mainColor, colorText: Colors.white);
     // }
+    update();
   }
 
   int get totalItem {

@@ -67,13 +67,27 @@ class PopularFoodDetail extends StatelessWidget {
                     children: [
                       AppIcon(icon: Icons.shopping_cart_outlined),
                       Get.find<PopularProductController>().totalItem>=1
-                      ?AppIcon(icon: Icons.shopping_cart_outlined)
-                      :AppIcon(
-                              icon: Icons.circle,
-                              size: 20,
-                              iconColor: Colors.transparent,
-                              backGroundColor: AppColors.mainColor,
-                            )
+                        ?Positioned(
+                          right: 0,
+                          top: 0,
+                          child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backGroundColor: AppColors.mainColor,
+                                ),
+                        )
+                        :Container(),
+
+                        Get.find<PopularProductController>().totalItem>=1
+                        ?Positioned(
+                          right: 5,
+                          top: 3,
+                          child: BigText(text: Get.find<PopularProductController>().totalItem.toString(),
+                            size: 12, color: Colors.white,  
+                          ),
+                        )
+                        :Container(),
                     ],
 
                   );
