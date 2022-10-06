@@ -1,5 +1,7 @@
 import 'package:aplikasi/controllers/popular_product_controller.dart';
 import 'package:aplikasi/controllers/recomended_product_controller.dart';
+import 'package:aplikasi/pages/auth/login_page.dart';
+import 'package:aplikasi/pages/cart/cart_page.dart';
 import 'package:aplikasi/pages/food/popular_food_detail.dart';
 import 'package:aplikasi/pages/food/recomended_food_detail.dart';
 import 'package:aplikasi/pages/home/food_page_body.dart';
@@ -28,9 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       
-      home: MainFoodPage(),
-      initialRoute: RouteHelper.initial,
-      getPages: RouteHelper.routes,
+      home: LoginPage(),
+      // initialRoute: RouteHelper.initial,
+      // getPages: RouteHelper.routes,
     );
   }
 }

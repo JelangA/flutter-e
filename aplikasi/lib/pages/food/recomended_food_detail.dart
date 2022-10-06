@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'package:aplikasi/controllers/cart_controller.dart';
 import 'package:aplikasi/controllers/popular_product_controller.dart';
 import 'package:aplikasi/controllers/recomended_product_controller.dart';
 import 'package:aplikasi/routes/route_helper.dart';
@@ -21,6 +22,8 @@ class RecommendedFoodDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var product =
         Get.find<RecomendedProductController>().recomendedProductList[pageId];
+    Get.find<PopularProductController>()
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -35,7 +38,39 @@ class RecommendedFoodDetail extends StatelessWidget {
                       Get.toNamed(RouteHelper.getInitialPage());
                     },
                     child: AppIcon(icon: Icons.clear)),
-                AppIcon(icon: Icons.shopping_cart_outlined),
+                // AppIcon(icon: Icons.shopping_cart_outlined),
+                GetBuilder<PopularProductController>(builder: (controller) {
+                  return Stack(
+                    children: [
+                      AppIcon(icon: Icons.shopping_cart_outlined),
+                      Get.find<PopularProductController>().totalItem >= 1
+                          ? Positioned(
+                              right: 0,
+                              top: 0,
+                              child: AppIcon(
+                                icon: Icons.circle,
+                                size: 20,
+                                iconColor: Colors.transparent,
+                                backGroundColor: AppColors.mainColor,
+                              ),
+                            )
+                          : Container(),
+                      Get.find<PopularProductController>().totalItem >= 1
+                          ? Positioned(
+                              right: 5,
+                              top: 3,
+                              child: BigText(
+                                text: Get.find<PopularProductController>()
+                                    .totalItem
+                                    .toString(),
+                                size: 12,
+                                color: Colors.white,
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  );
+                })
               ],
             ),
             bottom: PreferredSize(
@@ -110,7 +145,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     ),
                   ),
                   BigText(
-                    text: "\$ ${product.price} X 0 ",
+                    text: "\$ ${product.price!} X ${controller.inCartItems} ",
                     color: AppColors.mainBlackColor,
                     size: Dimentions.font26,
                   ),
@@ -163,20 +198,27 @@ class RecommendedFoodDetail extends StatelessWidget {
                     ),
                   ),
                   //add to cart container text
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: Dimentions.height20,
-                      bottom: Dimentions.height20,
-                      left: Dimentions.width20,
-                      right: Dimentions.width20,
-                    ),
-                    child: BigText(
-                      text: "\$ ${product.price!} | Add to cart",
-                      color: Colors.white,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimentions.radius20),
-                      color: AppColors.mainColor,
+
+                  GestureDetector(
+                    onTap: () {
+                      controller.AddItem(product);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        top: Dimentions.height20,
+                        bottom: Dimentions.height20,
+                        left: Dimentions.width20,
+                        right: Dimentions.width20,
+                      ),
+                      child: BigText(
+                        text: "\$ ${product.price!} | Add to cart",
+                        color: Colors.white,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimentions.radius20),
+                        color: AppColors.mainColor,
+                      ),
                     ),
                   ),
                 ],

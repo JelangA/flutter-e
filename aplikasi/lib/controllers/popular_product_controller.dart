@@ -1,5 +1,6 @@
 import 'package:aplikasi/controllers/cart_controller.dart';
 import 'package:aplikasi/data/repository/popular_product_repo.dart';
+import 'package:aplikasi/models/cart_model.dart';
 import 'package:aplikasi/models/products_model.dart';
 import 'package:aplikasi/util/colors.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +39,10 @@ class PopularProductController extends GetxController {
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
       _quantity = checkQuantity(_quantity + 1);
-      print("item = ${_quantity}");
+      // print("item = $_quantity");
     } else {
       _quantity = checkQuantity(_quantity - 1);
+      // print("decrement $_quantity");
     }
     update();
   }
@@ -53,6 +55,10 @@ class PopularProductController extends GetxController {
         backgroundColor: AppColors.mainColor,
         colorText: Colors.white,
       );
+      if (_inCartItems > 0) {
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((_inCartItems + quantity) > 20) {
       Get.snackbar(
@@ -101,5 +107,9 @@ class PopularProductController extends GetxController {
 
   int get totalItem {
     return _cart.totalItem;
+  }
+
+  List<CartModel> get getItems {
+    return _cart.getItems;
   }
 }
