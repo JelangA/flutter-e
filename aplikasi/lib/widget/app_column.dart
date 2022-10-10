@@ -16,7 +16,10 @@ class AppColumn extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BigText(text: text, size: Dimentions.font20,),
+        BigText(
+          text: text,
+          size: Dimentions.font20,
+        ),
         SizedBox(
           height: Dimentions.height10,
         ),
@@ -53,17 +56,17 @@ class AppColumn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconAndTextWidget(
-                icon: Icons.circle_sharp,
-                text: "Normal",
+                icon: Icons.shopping_cart,
+                text: "20RB terjual",
                 iconColor: AppColors.iconColor1),
             IconAndTextWidget(
                 icon: Icons.location_on,
                 text: "1.7km",
                 iconColor: AppColors.mainColor),
             IconAndTextWidget(
-              icon: Icons.access_time_rounded,
-              text: "32min",
-              iconColor: AppColors.iconColor2,
+              icon: Icons.circle,
+              text: "baru",
+              iconColor: AppColors.iconColor1,
             ),
           ],
         ),
