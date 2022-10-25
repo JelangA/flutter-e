@@ -262,7 +262,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           //image countainer
           GestureDetector(
             onTap: () {
-              Get.toNamed(RouteHelper.getPopularFood(index));
+              Get.toNamed(RouteHelper.getPopularFood(index, "home"));
             },
             child: Container(
               height: Dimentions.pageViewContainer,

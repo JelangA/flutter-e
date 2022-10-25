@@ -17,7 +17,9 @@ import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   final int pageId;
-  const PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
+  final String page;
+  const PopularFoodDetail({Key? key, required this.pageId, required this.page})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,16 +62,20 @@ class PopularFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(() => MainFoodPage());
+                    if (page == "cartpage") {
+                      Get.toNamed(RouteHelper.getCartPAge());
+                    }else{
+                      Get.toNamed(RouteHelper.getInitialPage());
+                    }
                   },
                   child: AppIcon(icon: Icons.arrow_back_ios),
                 ),
                 GetBuilder<PopularProductController>(builder: (controller) {
                   return GestureDetector(
                     onTap: () {
-                      if(controller.totalItem >= 1){
+                      if (controller.totalItem >= 1) {
                         Get.toNamed(RouteHelper.getCartPAge());
-                      }  
+                      }
                     },
                     child: Stack(
                       children: [
@@ -185,25 +191,33 @@ class PopularFoodDetail extends StatelessWidget {
                         onTap: () {
                           popularProduct.setQuantity(false);
                         },
-                        child: Icon(
-                          Icons.remove,
-                          color: AppColors.signColor,
+                        child: SizedBox(
+                          width: Dimentions.width20 * 2,
+                          height: Dimentions.height20 *2,
+                          child: Icon(
+                            Icons.remove,
+                            color: AppColors.signColor,
+                          ),
                         ),
                       ),
                       SizedBox(
-                        width: Dimentions.width10 / 2,
+                        width: Dimentions.width10,
                       ),
                       BigText(text: popularProduct.inCartItems.toString()),
                       SizedBox(
-                        width: Dimentions.width10 / 2,
+                        width: Dimentions.width10,
                       ),
                       GestureDetector(
                         onTap: () {
                           popularProduct.setQuantity(true);
                         },
-                        child: Icon(
-                          Icons.add,
-                          color: AppColors.signColor,
+                        child: SizedBox(
+                          width: Dimentions.width20 * 2,
+                          height: Dimentions.height20 * 4,
+                          child: Icon(
+                            Icons.add,
+                            color: AppColors.signColor,
+                          ),
                         ),
                       ),
                     ],

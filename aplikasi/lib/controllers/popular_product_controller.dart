@@ -86,6 +86,7 @@ class PopularProductController extends GetxController {
       _inCartItems = _cart.getQuantity(product);
     }
     print("quantity di cart = ${_inCartItems}");
+    
   }
 
   void AddItem(ProductModel product) {

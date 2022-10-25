@@ -16,7 +16,8 @@ import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
   final int pageId;
-  const RecommendedFoodDetail({Key? key, required this.pageId})
+  final String page;
+  const RecommendedFoodDetail({Key? key, required this.pageId, required this.page})
       : super(key: key);
 
   @override
@@ -36,10 +37,13 @@ class RecommendedFoodDetail extends StatelessWidget {
               children: [
                 GestureDetector(
                     onTap: () {
-                      Get.toNamed(RouteHelper.getInitialPage());
+                      if (page == "cartpage") {
+                        Get.toNamed(RouteHelper.getCartPAge());
+                      } else {
+                        Get.toNamed(RouteHelper.getInitialPage());
+                      }
                     },
                     child: AppIcon(icon: Icons.clear)),
-                // AppIcon(icon: Icons.shopping_cart_outlined),
                 GetBuilder<PopularProductController>(builder: (controller) {
                   return GestureDetector(
                     onTap: () {
@@ -85,8 +89,8 @@ class RecommendedFoodDetail extends StatelessWidget {
               preferredSize: Size.fromHeight(20),
               child: Container(
                 child: Center(
-                    child:
-                        BigText(size: Dimentions.font26, text: product.name!)),
+                  child: BigText(size: Dimentions.font26, text: product.name!),
+                ),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(
                   top: 5,
@@ -116,11 +120,12 @@ class RecommendedFoodDetail extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                    child: ExpandableTextWidget(
-                      text: product.description!,
-                    ),
-                    margin: EdgeInsets.only(
-                        left: Dimentions.width20, right: Dimentions.width20))
+                  child: ExpandableTextWidget(
+                    text: product.description!,
+                  ),
+                  margin: EdgeInsets.only(
+                      left: Dimentions.width20, right: Dimentions.width20),
+                ),
               ],
             ),
           ),
