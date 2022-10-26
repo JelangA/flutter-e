@@ -38,10 +38,10 @@ class RecommendedFoodDetail extends StatelessWidget {
                 GestureDetector(
                     onTap: () {
                       if (page == "cartpage") {
-                        Get.toNamed(RouteHelper.getCartPAge());
-                      } else {
-                        Get.toNamed(RouteHelper.getInitialPage());
-                      }
+                      Get.toNamed(RouteHelper.getCartPAge());
+                    }else{
+                      Get.toNamed(RouteHelper.getInitialPage());
+                    }
                     },
                     child: AppIcon(icon: Icons.clear)),
                 GetBuilder<PopularProductController>(builder: (controller) {

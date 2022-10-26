@@ -79,15 +79,15 @@ class CartPage extends StatelessWidget {
                                   .popularProductList
                                   .indexOf(_cartList[index].product!);
                           if (popularIndex >= 0) {
-                            Get.toNamed(
-                                RouteHelper.getPopularFood(popularIndex, "cartpage"));
+                            Get.toNamed(RouteHelper.getPopularFood(
+                                popularIndex, "cartpage"));
                           } else {
                             var recomendedIndex =
                                 Get.find<RecomendedProductController>()
                                     .recomendedProductList
                                     .indexOf(_cartList[index].product!);
-                            Get.toNamed(
-                                RouteHelper.getRecomendedFood(recomendedIndex));
+                            Get.toNamed(RouteHelper.getRecomendedFood(
+                                recomendedIndex, 'cartpage'));
                           }
                         },
                         child: Container(
@@ -138,9 +138,8 @@ class CartPage extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           BigText(
-                                            text: CartController
-                                                .getItems[index].price!
-                                                .toString(),
+                                            text: '\$ ${CartController
+                                                .getItems[index].price!}',
                                             color: Colors.redAccent,
                                           ),
                                           Container(
@@ -219,6 +218,76 @@ class CartPage extends StatelessWidget {
             ),
           )
         ],
+      ),
+      bottomNavigationBar: GetBuilder<CartController>(
+        builder: (CartController) {
+          return Container(
+            height: Dimentions.bottomHeightBar,
+            padding: EdgeInsets.only(
+                top: Dimentions.height30,
+                bottom: Dimentions.height30,
+                left: Dimentions.width20,
+                right: Dimentions.width20),
+            decoration: BoxDecoration(
+              color: AppColors.buttonBackgroundColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimentions.radius20 * 2),
+                topRight: Radius.circular(Dimentions.radius20 * 2),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //min add button continer
+                Container(
+                  padding: EdgeInsets.only(
+                    top: Dimentions.height20,
+                    bottom: Dimentions.height20,
+                    left: Dimentions.width20,
+                    right: Dimentions.width20,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimentions.radius20),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: Dimentions.width10,
+                      ),
+                      BigText(text: '\$ ${CartController.totalAmount}'),
+                      SizedBox(
+                        width: Dimentions.width10,
+                      ),
+                    ],
+                  ),
+                ),
+                //add to cart container text
+                GestureDetector(
+                  onTap: () {
+                    //popularProduct.AddItem(product);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      top: Dimentions.height20,
+                      bottom: Dimentions.height20,
+                      left: Dimentions.width20,
+                      right: Dimentions.width20,
+                    ),
+                    child: BigText(
+                      text: "Checkout",
+                      color: Colors.white,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimentions.radius20),
+                      color: AppColors.mainColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
