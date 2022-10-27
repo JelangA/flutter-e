@@ -43,6 +43,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   void dispose() {
     // TODO: implement dispose
     pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -117,7 +118,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
-        //recomended food 
+        //recomended food
         //listview food card
         GetBuilder<RecomendedProductController>(builder: (recomendedProduct) {
           return recomendedProduct.isLoaded
@@ -128,7 +129,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteHelper.getRecomendedFood(index, 'home'));
+                        Get.toNamed(
+                            RouteHelper.getRecomendedFood(index, 'home'));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -185,9 +187,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                               .name!),
                                       SizedBox(height: Dimentions.height10),
                                       SmallText(
-                                          text:
-                                              "tulisan deskripsi makanan dan minuman",
-                                            ),
+                                        text:
+                                            "tulisan deskripsi makanan dan minuman",
+                                      ),
                                       SizedBox(height: Dimentions.height10),
                                       Row(
                                         mainAxisAlignment:
